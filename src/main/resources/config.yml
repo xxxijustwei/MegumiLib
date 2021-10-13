@@ -1,0 +1,11 @@
+Prefix: '[MegumiLib]'
+HikariCP:
+  ConnectionTimeOut: 5000
+  MinimumIdle: 10
+  MaximumPoolSize: 50
+MYSQL:
+  Host: '127.0.0.1'
+  Port: '3306'
+  Database: ''
+  Users: ''
+  Password: ''

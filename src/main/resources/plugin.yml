@@ -1,0 +1,7 @@
+name: MegumiLib
+main: com.taylorswiftcn.justwei.MegumiLib
+version: ${project.version}
+author: 'Megumi'
+api-version: '1.13'
+depend:
+  - ProtocolLib
