@@ -12,11 +12,15 @@ import java.util.stream.Collectors;
 
 public abstract class ICommand implements TabExecutor {
 
-    public SubCommand help;
-    private HashMap<String, SubCommand> commands;
+    private SubCommand help;
+    private final HashMap<String, SubCommand> commands;
 
     public ICommand() {
         this.commands = new HashMap<>();
+    }
+
+    public void setHelpCommand(SubCommand help) {
+        this.help = help;
     }
 
     public void register(SubCommand command) {
