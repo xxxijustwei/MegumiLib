@@ -8,6 +8,8 @@ public abstract class SubCommand {
     private boolean isPlayer;
     private Player player;
 
+    public abstract String getIdentifier();
+
     public final void execute(CommandSender sender, String[] args) {
         this.isPlayer = sender instanceof Player;
         if (isPlayer) player = (Player) sender;

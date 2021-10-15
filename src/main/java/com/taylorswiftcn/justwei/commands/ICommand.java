@@ -13,10 +13,14 @@ import java.util.stream.Collectors;
 public abstract class ICommand implements TabExecutor {
 
     public SubCommand help;
-    public HashMap<String, SubCommand> commands;
+    private HashMap<String, SubCommand> commands;
 
     public ICommand() {
         this.commands = new HashMap<>();
+    }
+
+    public void register(SubCommand command) {
+        commands.put(command.getIdentifier().toLowerCase(), command);
     }
 
     @Override
