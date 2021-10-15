@@ -53,13 +53,13 @@ public class ItemBuilder {
     }
 
     public ItemBuilder setDisplayName(String name) {
-        meta.setDisplayName(name);
+        meta.setDisplayName(MegumiUtil.onReplace(name));
 
         return this;
     }
 
     public ItemBuilder setLore(List<String> lore) {
-        meta.setLore(lore);
+        meta.setLore(MegumiUtil.onReplace(lore));
 
         return this;
     }
