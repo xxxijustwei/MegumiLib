@@ -13,9 +13,9 @@ public class UnitConvert {
         input = Math.abs(input);
 
         if (input > million) {
-            return (negative ? "-" : "") + decimalFormat.format((double) input / (double) million) + " M";
+            return (negative ? "-" : "") + decimalFormat.format((double) input / (double) million) + " m";
         } else if (input > tenThousand) {
-            return (negative ? "-" : "") + decimalFormat.format((double) input / (double) tenThousand) + " W";
+            return (negative ? "-" : "") + decimalFormat.format((double) input / (double) tenThousand) + " w";
         } else {
             return (negative ? "-" : "") + input + "";
         }
