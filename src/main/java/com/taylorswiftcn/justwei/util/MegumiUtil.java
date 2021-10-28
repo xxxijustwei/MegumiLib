@@ -4,6 +4,7 @@ import com.taylorswiftcn.justwei.MegumiLib;
 import org.apache.commons.lang.StringUtils;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
+import org.bukkit.inventory.ItemStack;
 
 import java.io.File;
 import java.io.FileOutputStream;
@@ -37,7 +38,7 @@ public class MegumiUtil {
     }
 
     public static boolean isFloat(String a) {
-        Pattern pattern = Pattern.compile("^[-\\+]?[.\\d]*$");
+        Pattern pattern = Pattern.compile("^[-+]?[.\\d]*$");
         return pattern.matcher(a).matches();
     }
 
@@ -99,5 +100,9 @@ public class MegumiUtil {
 
     public static UUID getOfflinePlayerUUID(String name) {
         return UUID.nameUUIDFromBytes(String.format("OfflinePlayer:%s", new Object[] { name }).getBytes(StandardCharsets.UTF_8));
+    }
+
+    public static boolean isEmpty(ItemStack item) {
+        return item == null || item.getItemMeta() == null;
     }
 }
