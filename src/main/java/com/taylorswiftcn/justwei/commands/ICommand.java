@@ -30,8 +30,8 @@ public abstract class ICommand implements TabExecutor {
     @Override
     public boolean onCommand(CommandSender commandSender, Command command, String s, String[] strings) {
         SubCommand cmd = help;
-        if (strings.length >= 1 && commands.containsKey(strings[0])) {
-            cmd = commands.get(strings[0]);
+        if (strings.length >= 1 && commands.containsKey(strings[0].toLowerCase())) {
+            cmd = commands.get(strings[0].toLowerCase());
         }
         cmd.execute(commandSender, strings);
         return false;
