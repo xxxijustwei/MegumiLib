@@ -6,11 +6,11 @@ import org.bukkit.plugin.Plugin;
 
 import java.io.File;
 
-public abstract class IConfiguration {
+public abstract class JustConfiguration {
 
     private Plugin plugin;
 
-    public IConfiguration(Plugin plugin) {
+    public JustConfiguration(Plugin plugin) {
         this.plugin = plugin;
     }
 

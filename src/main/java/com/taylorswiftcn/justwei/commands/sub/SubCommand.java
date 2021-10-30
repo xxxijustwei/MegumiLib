@@ -1,4 +1,4 @@
-package com.taylorswiftcn.justwei.commands;
+package com.taylorswiftcn.justwei.commands.sub;
 
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
@@ -13,9 +13,12 @@ public abstract class SubCommand {
     public final void execute(CommandSender sender, String[] args) {
         this.isPlayer = sender instanceof Player;
         if (isPlayer) player = (Player) sender;
-        if (playerOnly() && !isPlayer) return;
+        if (playerOnly() && !isPlayer) {
+            sender.sendMessage(" §7控制台无法使用该命令");
+            return;
+        }
         if (getPermission() != null && !sender.hasPermission(getPermission())) {
-            sendNoPermission(sender);
+            sender.sendMessage(" §7你没有权限: §a" + getPermission());
             return;
         }
         perform(sender, args);
@@ -27,10 +30,6 @@ public abstract class SubCommand {
 
     public Player getPlayer() {
         return player;
-    }
-
-    public void sendNoPermission(CommandSender sender) {
-        sender.sendMessage(String.format(" §7你没有权限: §a%s", getPermission()));
     }
 
     public abstract void perform(CommandSender sender, String[] args);

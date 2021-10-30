@@ -5,7 +5,7 @@ import lombok.Getter;
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.plugin.Plugin;
 
-public class FileManager extends IConfiguration {
+public class FileManager extends JustConfiguration {
 
     @Getter
     private YamlConfiguration config;

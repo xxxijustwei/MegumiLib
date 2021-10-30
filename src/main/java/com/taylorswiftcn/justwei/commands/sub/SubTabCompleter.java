@@ -1,26 +1,24 @@
-package com.taylorswiftcn.justwei.commands;
+package com.taylorswiftcn.justwei.commands.sub;
 
 import org.apache.commons.lang.StringUtils;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
-import org.bukkit.command.TabExecutor;
+import org.bukkit.command.TabCompleter;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public abstract class ICommand implements TabExecutor {
+public abstract class SubTabCompleter extends SubCommand implements TabCompleter {
 
-    private SubCommand help;
+    private final SubCommand help;
     private final HashMap<String, SubCommand> commands;
 
-    public ICommand() {
-        this.commands = new HashMap<>();
-    }
-
-    public void setHelpCommand(SubCommand help) {
+    public SubTabCompleter(SubCommand help) {
         this.help = help;
+        this.commands = new HashMap<>();
     }
 
     public void register(SubCommand command) {
@@ -28,13 +26,12 @@ public abstract class ICommand implements TabExecutor {
     }
 
     @Override
-    public boolean onCommand(CommandSender commandSender, Command command, String s, String[] strings) {
+    public void perform(CommandSender sender, String[] args) {
         SubCommand cmd = help;
-        if (strings.length >= 1 && commands.containsKey(strings[0].toLowerCase())) {
-            cmd = commands.get(strings[0].toLowerCase());
+        if (args.length >= 1 && commands.containsKey(args[0].toLowerCase())) {
+            cmd = commands.get(args[0].toLowerCase());
         }
-        cmd.execute(commandSender, strings);
-        return false;
+        cmd.execute(sender, Arrays.copyOfRange(args, 1, args.length));
     }
 
     @Override
