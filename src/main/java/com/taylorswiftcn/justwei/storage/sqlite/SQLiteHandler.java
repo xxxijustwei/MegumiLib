@@ -1,8 +1,6 @@
 package com.taylorswiftcn.justwei.storage.sqlite;
 
-import com.taylorswiftcn.justwei.MegumiLib;
 import com.taylorswiftcn.justwei.storage.MegumiSQL;
-import com.taylorswiftcn.justwei.util.MegumiUtil;
 import org.bukkit.plugin.Plugin;
 
 import java.sql.*;
