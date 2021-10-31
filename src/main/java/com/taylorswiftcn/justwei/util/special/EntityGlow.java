@@ -11,7 +11,7 @@ public class EntityGlow {
 
     private static final MegumiLib plugin = MegumiLib.getInstance();
 
-    public static void set(Player player, Entity entity) {
+    public static void doGlow(Player player, Entity entity) {
         PacketContainer packet = new PacketContainer(PacketType.Play.Server.ENTITY_METADATA);
         packet.getIntegers().write(0, entity.getEntityId());
         WrappedDataWatcher watcher = new WrappedDataWatcher();
@@ -25,7 +25,7 @@ public class EntityGlow {
             e.printStackTrace();
         }
     }
-    public static void cancel(Player player, Entity entity) {
+    public static void undoGlow(Player player, Entity entity) {
         PacketContainer packet = new PacketContainer(PacketType.Play.Server.ENTITY_METADATA);
         packet.getIntegers().write(0, entity.getEntityId());
         WrappedDataWatcher watcher = new WrappedDataWatcher();
