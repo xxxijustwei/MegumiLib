@@ -5,6 +5,7 @@ import org.apache.commons.lang.StringUtils;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.command.TabExecutor;
+import org.bukkit.command.defaults.HelpCommand;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -31,9 +32,12 @@ public abstract class JustCommand implements TabExecutor {
         SubCommand cmd = help;
         if (strings.length >= 1 && commands.containsKey(strings[0].toLowerCase())) {
             cmd = commands.get(strings[0].toLowerCase());
+            cmd.execute(commandSender, Arrays.copyOfRange(strings, 1, strings.length));
         }
-        cmd.execute(commandSender, Arrays.copyOfRange(strings, 1, strings.length));
-        return false;
+        else {
+            cmd.execute(commandSender, strings);
+        }
+        return true;
     }
 
     @Override
