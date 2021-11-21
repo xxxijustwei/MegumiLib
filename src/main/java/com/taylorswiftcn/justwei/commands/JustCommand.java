@@ -28,14 +28,14 @@ public abstract class JustCommand implements TabExecutor {
     }
 
     @Override
-    public boolean onCommand(CommandSender commandSender, Command command, String s, String[] strings) {
+    public boolean onCommand(CommandSender sender, Command command, String s, String[] args) {
         SubCommand cmd = help;
-        if (strings.length >= 1 && commands.containsKey(strings[0].toLowerCase())) {
-            cmd = commands.get(strings[0].toLowerCase());
-            cmd.execute(commandSender, Arrays.copyOfRange(strings, 1, strings.length));
+        if (args.length >= 1 && commands.containsKey(args[0].toLowerCase())) {
+            cmd = commands.get(args[0].toLowerCase());
+            cmd.execute(sender, Arrays.copyOfRange(args, 1, args.length));
         }
         else {
-            cmd.execute(commandSender, strings);
+            cmd.execute(sender, args);
         }
         return true;
     }

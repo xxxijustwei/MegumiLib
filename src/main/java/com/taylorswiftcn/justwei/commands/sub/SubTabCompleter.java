@@ -30,8 +30,11 @@ public abstract class SubTabCompleter extends SubCommand implements TabCompleter
         SubCommand cmd = help;
         if (args.length >= 1 && commands.containsKey(args[0].toLowerCase())) {
             cmd = commands.get(args[0].toLowerCase());
+            cmd.execute(sender, Arrays.copyOfRange(args, 1, args.length));
         }
-        cmd.execute(sender, Arrays.copyOfRange(args, 1, args.length));
+        else {
+            cmd.execute(sender, args);
+        }
     }
 
     @Override
