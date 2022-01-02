@@ -7,7 +7,7 @@ import java.sql.*;
 import java.util.List;
 
 public class SQLiteHandler extends MegumiSQL {
-    private Plugin plugin;
+    private final Plugin plugin;
     private Connection connection;
 
     public SQLiteHandler(Plugin plugin) {
@@ -55,8 +55,7 @@ public class SQLiteHandler extends MegumiSQL {
     }
 
     public ResultSet querySQL(String query) {
-        try {
-            Statement stat = connection.createStatement();
+        try (Statement stat = connection.createStatement()) {
             if (stat == null) return null;
             return stat.executeQuery(query);
         }
@@ -67,8 +66,7 @@ public class SQLiteHandler extends MegumiSQL {
     }
 
     public synchronized boolean updateSQL(String data) {
-        try {
-            Statement stat = connection.createStatement();
+        try (Statement stat = connection.createStatement()) {
             stat.executeUpdate(data);
             return true;
         } catch (SQLException e) {
@@ -78,8 +76,7 @@ public class SQLiteHandler extends MegumiSQL {
     }
 
     public synchronized boolean updateSQL(String sql, List<String[]> data) {
-        try {
-            PreparedStatement ps = connection.prepareStatement(sql);
+        try (PreparedStatement ps = connection.prepareStatement(sql)) {
             for (String[] args : data) {
                 for (int i = 1; i <= args.length; i++) {
                     ps.setString(i, args[i - 1]);
