@@ -11,7 +11,7 @@ public enum UnitConvert {
     TenThousand(10000, "万", "W"),
     Million(100000000, "百万", "M");
 
-    private final long value;
+    private final double value;
     private final String symbol_cn;
     private final String symbol_en;
 
@@ -21,27 +21,45 @@ public enum UnitConvert {
         this.symbol_en = symbol_en;
     }
 
-    public final static DecimalFormat decimalFormat = new java.text.DecimalFormat("0");
+    public static String formatCN(UnitConvert unitConvert, double value) {
+        return formatCN(unitConvert, value, 0);
+    }
 
-    public static String formatCN(UnitConvert unitConvert, long value) {
+    public static String formatEN(UnitConvert unitConvert, double value) {
+        return formatEN(unitConvert, value, 0);
+    }
+
+    public static String formatCN(UnitConvert unitConvert, double value, int decimalPlace) {
         boolean negative = value < 0;
         value = Math.abs(value);
 
         if (value >= unitConvert.getValue()) {
-            return (negative ? "-" : "") + decimalFormat.format((double) value / (double) unitConvert.getValue()) + unitConvert.getSymbol_cn();
+            return (negative ? "-" : "") + getFormat(decimalPlace).format(value / unitConvert.getValue()) + unitConvert.getSymbol_cn();
         }
 
         return (negative ? "-" : "") + value + "";
     }
 
-    public static String formatEN(UnitConvert unitConvert, long value) {
+    public static String formatEN(UnitConvert unitConvert, double value, int decimalPlace) {
         boolean negative = value < 0;
         value = Math.abs(value);
 
         if (value >= unitConvert.getValue()) {
-            return (negative ? "-" : "") + decimalFormat.format((double) value / (double) unitConvert.getValue()) + unitConvert.getSymbol_en();
+            return (negative ? "-" : "") + getFormat(decimalPlace).format(value / unitConvert.getValue()) + unitConvert.getSymbol_en();
         }
 
         return (negative ? "-" : "") + value + "";
+    }
+
+    private static DecimalFormat getFormat(int size) {
+        StringBuilder sb = new StringBuilder("0");
+        if (size > 0) {
+            sb.append(".");
+            for (int i = 0; i < size; i++) {
+                sb.append("0");
+            }
+        }
+
+        return new DecimalFormat(sb.toString());
     }
 }
