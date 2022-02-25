@@ -1,6 +1,7 @@
 package com.taylorswiftcn.justwei.commands;
 
 import com.taylorswiftcn.justwei.commands.sub.SubCommand;
+import com.taylorswiftcn.justwei.commands.sub.SubTabCommand;
 import com.taylorswiftcn.justwei.commands.sub.SubTabCompleter;
 import org.apache.commons.lang.StringUtils;
 import org.bukkit.command.Command;
@@ -50,14 +51,20 @@ public abstract class JustCommand implements TabExecutor {
             return keys.stream().filter(s -> StringUtils.startsWithIgnoreCase(s, args[0])).collect(Collectors.toList());
         }
 
-        if (args.length == 2 && commands.containsKey(args[0])) {
-            String goal = args[0];
-            if (commands.get(goal) instanceof SubTabCompleter) {
-                SubTabCompleter completer = (SubTabCompleter) commands.get(goal);
-                List<String> keys = getKeys(sender, completer.getCommands());
+        String goal = args[0];
+        SubCommand sub = commands.get(goal);
+        if (sub == null) return null;
 
-                return keys.stream().filter(s -> StringUtils.startsWithIgnoreCase(s, args[1])).collect(Collectors.toList());
-            }
+        if (sub instanceof SubTabCommand) {
+            SubTabCommand subTabCommand = (SubTabCommand) sub;
+            return subTabCommand.getTabKeys(args.length - subTabCommand.getLayer());
+        }
+
+        if (args.length == 2 && sub instanceof SubTabCompleter) {
+            SubTabCompleter subTabCompleter = (SubTabCompleter) sub;
+            List<String> keys = getKeys(sender, subTabCompleter.getCommands());
+
+            return keys.stream().filter(s -> StringUtils.startsWithIgnoreCase(s, args[1])).collect(Collectors.toList());
         }
 
         return null;

@@ -37,7 +37,7 @@ public enum UnitConvert {
             return (negative ? "-" : "") + getFormat(decimalPlace).format(value / unitConvert.getValue()) + unitConvert.getSymbol_cn();
         }
 
-        return (negative ? "-" : "") + value + "";
+        return (negative ? "-" : "") + (int) value + "";
     }
 
     public static String formatEN(UnitConvert unitConvert, double value, int decimalPlace) {
@@ -48,7 +48,7 @@ public enum UnitConvert {
             return (negative ? "-" : "") + getFormat(decimalPlace).format(value / unitConvert.getValue()) + unitConvert.getSymbol_en();
         }
 
-        return (negative ? "-" : "") + value + "";
+        return (negative ? "-" : "") + (int) value + "";
     }
 
     private static DecimalFormat getFormat(int size) {
